@@ -11,8 +11,8 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api")
-@CrossOrigin("*")
+@RequestMapping("/api") // Base path for API endpoints
+@CrossOrigin("*") // Allow all cross-origin requests
 public class BookController {
 
     final BookRepository bookRepository;
@@ -22,17 +22,20 @@ public class BookController {
         this.bookRepository = bookRepository;
     }
 
+    // Get all books, sorted by title
     @GetMapping("/books")
     public List<Book> getAllBooks() {
         Sort sortByTitleAsc = Sort.by(Sort.Direction.ASC, "title");
         return bookRepository.findAll(sortByTitleAsc);
     }
 
+    // Create a new book entry
     @PostMapping("/books")
     public Book createBook(@Valid @RequestBody Book book) {
         return bookRepository.save(book);
     }
 
+    // Retrieve a single book by ID
     @GetMapping("/books/{id}")
     public ResponseEntity<Book> getBookById(@PathVariable("id") String id) {
         return bookRepository.findById(id)
@@ -40,6 +43,7 @@ public class BookController {
                 .orElse(ResponseEntity.notFound().build());
     }
 
+    // Update an existing book
     @PutMapping("/books/{id}")
     public ResponseEntity<Book> updateBook(@PathVariable("id") String id, @Valid @RequestBody Book book) {
         return bookRepository.findById(id)
@@ -55,6 +59,7 @@ public class BookController {
                 }).orElse(ResponseEntity.notFound().build());
     }
 
+    // Delete a book by ID
     @DeleteMapping("/books/{id}")
     public ResponseEntity<?> deleteBook(@PathVariable("id") String id) {
         return bookRepository.findById(id)
