@@ -28,19 +28,13 @@ export class BookListComponent implements OnInit {
   }
 
   createBook(bookForm: NgForm): void {
-    // this.bookService.createBook(this.newBook).toPromise()
-    //  .then(createBook => {
-    //     bookForm.reset();
-    //     this.newBook = new Book();
-    //     this.books.unshift(createBook);
-    //   });
     this.bookService.createBook(this.newBook).subscribe(book => {
       this.books.unshift(book);  // Prepend the new book to the books array
       bookForm.resetForm();          // Reset the form after submission
       this.newBook = new Book(); // Reset the newBook object to clear the form fields
   
       // Force update to the table data source for Angular Material Table
-      this.books = [...this.books];
+      this.books = [...this.books.sort((prev, next) => prev.title.localeCompare(next.title))];
     }, error => {
       console.error('Error creating book', error);
       // Optionally, display an error message
