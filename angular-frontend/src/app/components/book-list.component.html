@@ -2,45 +2,28 @@
   <h1 class="page-title">My Books</h1>
   <div class="book-create">
     <form #bookForm="ngForm" (ngSubmit)="createBook(bookForm)" novalidate>
-      <input type="text" id="title" class="form-control" placeholder="Type a book title and press enter..." required name="title" [(ngModel)]="newBook.title" #title="ngModel">
-      <div *ngIf="title.errors && title.dirty" class="alert alert-danger">
-        <div [hidden]="title.errors.required">
-          Title is required.
-        </div>
+      <!-- First line: Title, Author -->
+      <div class="form-row">
+        <input type="text" id="title" class="form-control" placeholder="Book Title" required name="title" [(ngModel)]="newBook.title">
+        <input type="text" id="author" class="form-control" placeholder="Author" required name="author" [(ngModel)]="newBook.author">
       </div>
-      <input type="text" id="author" class="form-control" placeholder="Author" required name="author" [(ngModel)]="newBook.author" #author="ngModel">
-      <div *ngIf="author.errors && author.dirty" class="alert alert-danger">
-        <div [hidden]="author.errors.required">
-          Author is required.
-        </div>
+  
+      <!-- Second line: Genre, ISBN -->
+      <div class="form-row">
+        <input type="text" id="genre" class="form-control" placeholder="Genre" required name="genre" [(ngModel)]="newBook.genre">
+        <input type="text" id="isbn" class="form-control" placeholder="ISBN" required name="isbn" [(ngModel)]="newBook.isbn">
       </div>
-      <input type="text" id="genre" class="form-control" placeholder="Genre" required name="genre" [(ngModel)]="newBook.genre" #genre="ngModel">
-      <div *ngIf="genre.errors && genre.dirty" class="alert alert-danger">
-        <div [hidden]="genre.errors.required">
-          Genre is required.
-        </div>
+  
+      <!-- Third line: Publisher, Publish Year -->
+      <div class="form-row">
+        <input type="text" id="publisher" class="form-control" placeholder="Publisher" required name="publisher" [(ngModel)]="newBook.publisher">
+        <input type="text" id="publishYear" class="form-control" placeholder="Publish Year" required name="publishYear" [(ngModel)]="newBook.publishYear">
       </div>
-      <input type="text" id="isbn" class="form-control" placeholder="ISBN" required name="isbn" [(ngModel)]="newBook.isbn" #isbn="ngModel">
-      <div *ngIf="isbn.errors && isbn.dirty" class="alert alert-danger">
-        <div [hidden]="isbn.errors.required">
-          ISBN is required.
-        </div>
-      </div>
-      <input type="text" id="publisher" class="form-control" placeholder="Publisher" required name="publisher" [(ngModel)]="newBook.publisher" #publisher="ngModel">
-      <div *ngIf="publisher.errors && publisher.dirty" class="alert alert-danger">
-        <div [hidden]="publisher.errors.required">
-          Publisher is required.
-        </div>
-      </div>
-      <input type="text" id="publishYear" class="form-control" placeholder="Publish Year" required name="publishYear" [(ngModel)]="newBook.publishYear" #publishYear="ngModel">
-      <div *ngIf="publishYear.errors && publishYear.dirty" class="alert alert-danger">
-        <div [hidden]="publishYear.errors.required">
-          Publish Year is required.
-        </div>
-      </div>
+  
       <button type="submit" class="btn btn-primary">Add Book</button>
     </form>
   </div>
+  
 
   <mat-card>
     <mat-card-title>Books List</mat-card-title>
