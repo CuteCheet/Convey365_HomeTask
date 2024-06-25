@@ -1,6 +1,6 @@
-package nl.codecontrol.todoapp.repositories;
+package nl.codecontrol.bookapp.repositories;
 
-import nl.codecontrol.todoapp.models.Book;
+import nl.codecontrol.bookapp.models.Book;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 

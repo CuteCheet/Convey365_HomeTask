@@ -1,4 +1,4 @@
-package nl.codecontrol.todoapp.models;
+package nl.codecontrol.bookapp.models;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;

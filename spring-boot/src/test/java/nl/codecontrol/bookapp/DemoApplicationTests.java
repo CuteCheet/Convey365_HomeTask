@@ -1,4 +1,4 @@
-package nl.codecontrol.todoapp;
+package nl.codecontrol.bookapp;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

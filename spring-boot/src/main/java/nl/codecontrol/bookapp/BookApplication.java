@@ -1,4 +1,4 @@
-package nl.codecontrol.todoapp;
+package nl.codecontrol.bookapp;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -16,10 +16,10 @@ import org.springframework.web.filter.CorsFilter;
 import java.util.Collections;
 
 @SpringBootApplication(exclude = EmbeddedMongoAutoConfiguration.class)
-public class TodoApplication {
+public class BookApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(TodoApplication.class, args);
+		SpringApplication.run(BookApplication.class, args);
 	}
 
     @Bean

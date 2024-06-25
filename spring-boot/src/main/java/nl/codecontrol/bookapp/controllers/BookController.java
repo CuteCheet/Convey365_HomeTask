@@ -1,7 +1,7 @@
-package nl.codecontrol.todoapp.controllers;
+package nl.codecontrol.bookapp.controllers;
 
-import nl.codecontrol.todoapp.models.Book;
-import nl.codecontrol.todoapp.repositories.BookRepository;
+import nl.codecontrol.bookapp.models.Book;
+import nl.codecontrol.bookapp.repositories.BookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
