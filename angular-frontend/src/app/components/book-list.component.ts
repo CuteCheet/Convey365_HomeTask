@@ -29,11 +29,15 @@ export class BookListComponent implements OnInit {
   // Handle creation of a new book
   createBook(bookForm: NgForm): void {
     this.bookService.createBook(this.newBook).subscribe(book => {
-      this.books.unshift(book); // Add the new book to the start of the list
-      bookForm.resetForm(); // Reset the form fields
-      this.newBook = new Book(); // Reset the new book model
+      this.books.unshift(book);  // Prepend the new book to the books array
+      bookForm.resetForm();          // Reset the form after submission
+      this.newBook = new Book(); // Reset the newBook object to clear the form fields
+  
+      // Force update to the table data source for Angular Material Table
+      this.books = [...this.books.sort((prev, next) => prev.title.localeCompare(next.title))];
     }, error => {
       console.error('Error creating book', error);
+      // Optionally, display an error message
     });
   }
 
