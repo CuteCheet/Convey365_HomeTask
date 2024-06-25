@@ -35,7 +35,7 @@
       <input type="text" id="publishYear" class="form-control" placeholder="Publish Year" required name="publishYear" [(ngModel)]="newBook.publishYear" #publishYear="ngModel">
       <div *ngIf="publishYear.errors && publishYear.dirty" class="alert alert-danger">
         <div [hidden]="publishYear.errors.required">
-          Publication Date is required.
+          Publish Year is required.
         </div>
       </div>
       <button type="submit" class="btn btn-primary">Add Book</button>
@@ -47,19 +47,11 @@
     <mat-card-content>
       <table mat-table [dataSource]="books" class="mat-elevation-z8">
 
-        <!-- Select Column -->
-        <ng-container matColumnDef="select">
-          <th mat-header-cell *matHeaderCellDef>Select</th>
-          <td mat-cell *matCellDef="let book">
-            <mat-checkbox (click)="$event.stopPropagation()" (change)="toggleCompleted(book)" [checked]="book.completed"></mat-checkbox>
-          </td>
-        </ng-container>
-
         <!-- Title Column -->
         <ng-container matColumnDef="title">
           <th mat-header-cell *matHeaderCellDef>Title</th>
           <td mat-cell *matCellDef="let book">
-            <div *ngIf="editing || editingBook.id!== book.id">{{ book.title }}</div>
+            <div *ngIf="!editing || editingBook.id!== book.id">{{ book.title }}</div>
             <input *ngIf="editing && editingBook.id === book.id" type="text" class="form-control" [(ngModel)]="editingBook.title" required>
           </td>
         </ng-container>
@@ -68,7 +60,7 @@
         <ng-container matColumnDef="author">
           <th mat-header-cell *matHeaderCellDef>Author</th>
           <td mat-cell *matCellDef="let book">
-            <div *ngIf="editing || editingBook.id!== book.id">{{ book.author }}</div>
+            <div *ngIf="!editing || editingBook.id!== book.id">{{ book.author }}</div>
             <input *ngIf="editing && editingBook.id === book.id" type="text" class="form-control" [(ngModel)]="editingBook.author">
           </td>
         </ng-container>
@@ -77,7 +69,7 @@
         <ng-container matColumnDef="genre">
           <th mat-header-cell *matHeaderCellDef>Genre</th>
           <td mat-cell *matCellDef="let book">
-            <div *ngIf="editing || editingBook.id!== book.id">{{ book.genre }}</div>
+            <div *ngIf="!editing || editingBook.id!== book.id">{{ book.genre }}</div>
             <input *ngIf="editing && editingBook.id === book.id" type="text" class="form-control" [(ngModel)]="editingBook.genre">
           </td>
         </ng-container>
@@ -86,7 +78,7 @@
         <ng-container matColumnDef="isbn">
           <th mat-header-cell *matHeaderCellDef>ISBN</th>
           <td mat-cell *matCellDef="let book">
-            <div *ngIf="editing || editingBook.id!== book.id">{{ book.isbn }}</div>
+            <div *ngIf="!editing || editingBook.id!== book.id">{{ book.isbn }}</div>
             <input *ngIf="editing && editingBook.id === book.id" type="text" class="form-control" [(ngModel)]="editingBook.isbn">
           </td>
         </ng-container>
@@ -95,17 +87,17 @@
         <ng-container matColumnDef="publisher">
           <th mat-header-cell *matHeaderCellDef>Publisher</th>
           <td mat-cell *matCellDef="let book">
-            <div *ngIf="editing || editingBook.id!== book.id">{{ book.publisher }}</div>
+            <div *ngIf="!editing || editingBook.id!== book.id">{{ book.publisher }}</div>
             <input *ngIf="editing && editingBook.id === book.id" type="text" class="form-control" [(ngModel)]="editingBook.publisher">
           </td>
         </ng-container>
 
-        <!-- Publication Date Column -->
+        <!-- Publish Year Column -->
         <ng-container matColumnDef="publishYear">
           <th mat-header-cell *matHeaderCellDef>Publication Date</th>
           <td mat-cell *matCellDef="let book">
-            <div *ngIf="editing || editingBook.id!== book.id">{{ book.publishYear | date:'fullDate' }}</div>
-            <input *ngIf="editing && editingBook.id === book.id" type="date" class="form-control" [(ngModel)]="editingBook.publishYear">
+            <div *ngIf="!editing || editingBook.id!== book.id">{{ book.publishYear}}</div>
+            <input *ngIf="editing && editingBook.id === book.id" type="text" class="form-control" [(ngModel)]="editingBook.publishYear">
           </td>
         </ng-container>
 
@@ -113,7 +105,7 @@
         <ng-container matColumnDef="actions">
           <th mat-header-cell *matHeaderCellDef>Actions</th>
           <td mat-cell *matCellDef="let book">
-            <span *ngIf="editing || editingBook.id!== book.id">
+            <span *ngIf="!editing || editingBook.id!== book.id">
               <i class="material-icons edit" (click)="editBook(book)">edit</i>
               <i class="material-icons delete" (click)="deleteBook(book.id)">clear</i>
             </span>
@@ -124,8 +116,8 @@
           </td>
         </ng-container>
 
-        <tr mat-header-row *matHeaderRowDef="['select', 'title', 'author', 'genre', 'isbn', 'publisher', 'publishYear', 'actions']"></tr>
-        <tr mat-row *matRowDef="let row; columns: ['select', 'title', 'author', 'genre', 'isbn', 'publisher', 'publishYear', 'actions'];"></tr>
+        <tr mat-header-row *matHeaderRowDef="['title', 'author', 'genre', 'isbn', 'publisher', 'publishYear', 'actions']"></tr>
+        <tr mat-row *matRowDef="let row; columns: ['title', 'author', 'genre', 'isbn', 'publisher', 'publishYear', 'actions'];"></tr>
       </table>
     </mat-card-content>
   </mat-card>
