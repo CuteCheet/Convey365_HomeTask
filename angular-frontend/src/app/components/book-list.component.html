@@ -1,0 +1,136 @@
+<div class="book-content">
+  <h1 class="page-title">My Books</h1>
+  <div class="book-create">
+    <form #bookForm="ngForm" (ngSubmit)="createBook(bookForm)" novalidate>
+      <input type="text" id="title" class="form-control" placeholder="Type a book title and press enter..." required name="title" [(ngModel)]="newBook.title" #title="ngModel">
+      <div *ngIf="title.errors && title.dirty" class="alert alert-danger">
+        <div [hidden]="title.errors.required">
+          Title is required.
+        </div>
+      </div>
+      <input type="text" id="author" class="form-control" placeholder="Author" required name="author" [(ngModel)]="newBook.author" #author="ngModel">
+      <div *ngIf="author.errors && author.dirty" class="alert alert-danger">
+        <div [hidden]="author.errors.required">
+          Author is required.
+        </div>
+      </div>
+      <input type="text" id="genre" class="form-control" placeholder="Genre" required name="genre" [(ngModel)]="newBook.genre" #genre="ngModel">
+      <div *ngIf="genre.errors && genre.dirty" class="alert alert-danger">
+        <div [hidden]="genre.errors.required">
+          Genre is required.
+        </div>
+      </div>
+      <input type="text" id="isbn" class="form-control" placeholder="ISBN" required name="isbn" [(ngModel)]="newBook.isbn" #isbn="ngModel">
+      <div *ngIf="isbn.errors && isbn.dirty" class="alert alert-danger">
+        <div [hidden]="isbn.errors.required">
+          ISBN is required.
+        </div>
+      </div>
+      <input type="text" id="publisher" class="form-control" placeholder="Publisher" required name="publisher" [(ngModel)]="newBook.publisher" #publisher="ngModel">
+      <div *ngIf="publisher.errors && publisher.dirty" class="alert alert-danger">
+        <div [hidden]="publisher.errors.required">
+          Publisher is required.
+        </div>
+      </div>
+      <input type="text" id="publicationYear" class="form-control" placeholder="Publication Year" required name="publicationYear" [(ngModel)]="newBook.publicationYear" #publicationYear="ngModel">
+      <div *ngIf="publicationYear.errors && publicationYear.dirty" class="alert alert-danger">
+        <div [hidden]="publicationYear.errors.required">
+          Publication Date is required.
+        </div>
+      </div>
+      <button type="submit" class="btn btn-primary">Add Book</button>
+    </form>
+  </div>
+
+  <mat-card>
+    <mat-card-title>Books List</mat-card-title>
+    <mat-card-content>
+      <table mat-table [dataSource]="books" class="mat-elevation-z8">
+
+        <!-- Select Column -->
+        <ng-container matColumnDef="select">
+          <th mat-header-cell *matHeaderCellDef>Select</th>
+          <td mat-cell *matCellDef="let book">
+            <mat-checkbox (click)="$event.stopPropagation()" (change)="toggleCompleted(book)" [checked]="book.completed"></mat-checkbox>
+          </td>
+        </ng-container>
+
+        <!-- Title Column -->
+        <ng-container matColumnDef="title">
+          <th mat-header-cell *matHeaderCellDef>Title</th>
+          <td mat-cell *matCellDef="let book">
+            <div *ngIf="editing || editingBook.id!== book.id">{{ book.title }}</div>
+            <input *ngIf="editing && editingBook.id === book.id" type="text" class="form-control" [(ngModel)]="editingBook.title" required>
+          </td>
+        </ng-container>
+
+        <!-- Author Column -->
+        <ng-container matColumnDef="author">
+          <th mat-header-cell *matHeaderCellDef>Author</th>
+          <td mat-cell *matCellDef="let book">
+            <div *ngIf="editing || editingBook.id!== book.id">{{ book.author }}</div>
+            <input *ngIf="editing && editingBook.id === book.id" type="text" class="form-control" [(ngModel)]="editingBook.author">
+          </td>
+        </ng-container>
+
+        <!-- Genre Column -->
+        <ng-container matColumnDef="genre">
+          <th mat-header-cell *matHeaderCellDef>Genre</th>
+          <td mat-cell *matCellDef="let book">
+            <div *ngIf="editing || editingBook.id!== book.id">{{ book.genre }}</div>
+            <input *ngIf="editing && editingBook.id === book.id" type="text" class="form-control" [(ngModel)]="editingBook.genre">
+          </td>
+        </ng-container>
+
+        <!-- ISBN Column -->
+        <ng-container matColumnDef="isbn">
+          <th mat-header-cell *matHeaderCellDef>ISBN</th>
+          <td mat-cell *matCellDef="let book">
+            <div *ngIf="editing || editingBook.id!== book.id">{{ book.isbn }}</div>
+            <input *ngIf="editing && editingBook.id === book.id" type="text" class="form-control" [(ngModel)]="editingBook.isbn">
+          </td>
+        </ng-container>
+
+        <!-- Publisher Column -->
+        <ng-container matColumnDef="publisher">
+          <th mat-header-cell *matHeaderCellDef>Publisher</th>
+          <td mat-cell *matCellDef="let book">
+            <div *ngIf="editing || editingBook.id!== book.id">{{ book.publisher }}</div>
+            <input *ngIf="editing && editingBook.id === book.id" type="text" class="form-control" [(ngModel)]="editingBook.publisher">
+          </td>
+        </ng-container>
+
+        <!-- Publication Date Column -->
+        <ng-container matColumnDef="publicationYear">
+          <th mat-header-cell *matHeaderCellDef>Publication Date</th>
+          <td mat-cell *matCellDef="let book">
+            <div *ngIf="editing || editingBook.id!== book.id">{{ book.publicationYear | date:'fullDate' }}</div>
+            <input *ngIf="editing && editingBook.id === book.id" type="date" class="form-control" [(ngModel)]="editingBook.publicationYear">
+          </td>
+        </ng-container>
+
+        <!-- Actions Column -->
+        <ng-container matColumnDef="actions">
+          <th mat-header-cell *matHeaderCellDef>Actions</th>
+          <td mat-cell *matCellDef="let book">
+            <span *ngIf="editing || editingBook.id!== book.id">
+              <i class="material-icons edit" (click)="editBook(book)">edit</i>
+              <i class="material-icons delete" (click)="deleteBook(book.id)">clear</i>
+            </span>
+            <span *ngIf="editing && editingBook.id === book.id">
+              <i class="material-icons" (click)="updateBook(editingBook)">done</i>
+              <i class="material-icons" (click)="clearEditing()">clear</i>
+            </span>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="['select', 'title', 'author', 'genre', 'isbn', 'publisher', 'publicationYear', 'actions']"></tr>
+        <tr mat-row *matRowDef="let row; columns: ['select', 'title', 'author', 'genre', 'isbn', 'publisher', 'publicationYear', 'actions'];"></tr>
+      </table>
+    </mat-card-content>
+  </mat-card>
+  
+  <div class="no-books" *ngIf="books && books.length == 0">
+    <p>No Books Found!</p>
+  </div>
+</div>

@@ -1,5 +1,5 @@
 <div class="todo-content">
-  <h1 class="page-title">My Todos</h1>
+  <h1 class="page-title">BookList</h1>
   <div class="todo-create">
     <form #todoForm="ngForm" (ngSubmit)="createTodo(todoForm)" novalidate>
       <input type="text" id="title" class="form-control" placeholder="Type a todo and press enter..."
@@ -12,6 +12,12 @@
           Title is required.
         </div>
       </div>
+    </form>
+    <form>
+      <mat-form-field class="example-form-field">
+        <mat-label>Clearable input</mat-label>
+        <input matInput type="text" [(ngModel)]="value">
+      </mat-form-field>
     </form>
   </div>
   <ul class="todo-list">
@@ -46,6 +52,53 @@
       </div>
     </li>
   </ul>
+
+  <mat-card>
+    <mat-card-title>Todos List</mat-card-title>
+    <mat-card-content>
+      <table mat-table [dataSource]="todos" class="mat-elevation-z8">
+
+        <!-- Checkbox Column -->
+        <ng-container matColumnDef="select">
+          <th mat-header-cell *matHeaderCellDef></th>
+          <td mat-cell *matCellDef="let todo">
+            <mat-checkbox (click)="$event.stopPropagation()"
+                          (change)="toggleCompleted(todo)"
+                          [checked]="todo.completed"></mat-checkbox>
+          </td>
+        </ng-container>
+
+        <!-- Title Column -->
+        <ng-container matColumnDef="title">
+          <th mat-header-cell *matHeaderCellDef>Title</th>
+          <td mat-cell *matCellDef="let todo">
+            <div *ngIf="!editing || editingTodo.id != todo.id">{{ todo.title }}</div>
+            <input *ngIf="editing && editingTodo.id === todo.id" type="text"
+                   class="form-control" [(ngModel)]="editingTodo.title" required>
+          </td>
+        </ng-container>
+
+        <!-- Actions Column -->
+        <ng-container matColumnDef="actions">
+          <th mat-header-cell *matHeaderCellDef>Actions</th>
+          <td mat-cell *matCellDef="let todo">
+            <span *ngIf="!editing || editingTodo.id != todo.id">
+              <i class="material-icons edit" (click)="editTodo(todo)">edit</i>
+              <i class="material-icons delete" (click)="deleteTodo(todo.id)">clear</i>
+            </span>
+            <span *ngIf="editing && editingTodo.id === todo.id">
+              <i class="material-icons" (click)="updateTodo(editingTodo)">done</i>
+              <i class="material-icons" (click)="clearEditing()">clear</i>
+            </span>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="['select', 'title', 'actions']"></tr>
+        <tr mat-row *matRowDef="let row; columns: ['select', 'title', 'actions'];"></tr>
+      </table>
+    </mat-card-content>
+  </mat-card>
+  
   <div class="no-todos" *ngIf="todos && todos.length == 0">
     <p>No Todos Found!</p>
   </div>
