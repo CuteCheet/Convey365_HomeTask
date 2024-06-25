@@ -66,13 +66,4 @@ export class BookListComponent implements OnInit {
     this.editingBook = new Book();
     this.editing = false;
   }
-
-  toggleCompleted(book: Book): void {
-    // book.completed =!book.completed;
-    // this.bookService.updateBook(book).toPromise()
-    //  .then(updatedBook => {
-    //     const existingBook = this.books.find(b => b.id === updatedBook.id);
-    //     Object.assign(existingBook, updatedBook);
-    //   });
-  }
 }
