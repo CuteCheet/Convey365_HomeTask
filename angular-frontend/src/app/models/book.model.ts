@@ -5,5 +5,5 @@ export class Book {
   genre: string;
   isbn: string;
   publisher: string;
-  publicationYear: number;
+  publishYear: number;
 }

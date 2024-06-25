@@ -32,9 +32,9 @@
           Publisher is required.
         </div>
       </div>
-      <input type="text" id="publicationYear" class="form-control" placeholder="Publication Year" required name="publicationYear" [(ngModel)]="newBook.publicationYear" #publicationYear="ngModel">
-      <div *ngIf="publicationYear.errors && publicationYear.dirty" class="alert alert-danger">
-        <div [hidden]="publicationYear.errors.required">
+      <input type="text" id="publishYear" class="form-control" placeholder="Publish Year" required name="publishYear" [(ngModel)]="newBook.publishYear" #publishYear="ngModel">
+      <div *ngIf="publishYear.errors && publishYear.dirty" class="alert alert-danger">
+        <div [hidden]="publishYear.errors.required">
           Publication Date is required.
         </div>
       </div>
@@ -101,11 +101,11 @@
         </ng-container>
 
         <!-- Publication Date Column -->
-        <ng-container matColumnDef="publicationYear">
+        <ng-container matColumnDef="publishYear">
           <th mat-header-cell *matHeaderCellDef>Publication Date</th>
           <td mat-cell *matCellDef="let book">
-            <div *ngIf="editing || editingBook.id!== book.id">{{ book.publicationYear | date:'fullDate' }}</div>
-            <input *ngIf="editing && editingBook.id === book.id" type="date" class="form-control" [(ngModel)]="editingBook.publicationYear">
+            <div *ngIf="editing || editingBook.id!== book.id">{{ book.publishYear | date:'fullDate' }}</div>
+            <input *ngIf="editing && editingBook.id === book.id" type="date" class="form-control" [(ngModel)]="editingBook.publishYear">
           </td>
         </ng-container>
 
@@ -124,8 +124,8 @@
           </td>
         </ng-container>
 
-        <tr mat-header-row *matHeaderRowDef="['select', 'title', 'author', 'genre', 'isbn', 'publisher', 'publicationYear', 'actions']"></tr>
-        <tr mat-row *matRowDef="let row; columns: ['select', 'title', 'author', 'genre', 'isbn', 'publisher', 'publicationYear', 'actions'];"></tr>
+        <tr mat-header-row *matHeaderRowDef="['select', 'title', 'author', 'genre', 'isbn', 'publisher', 'publishYear', 'actions']"></tr>
+        <tr mat-row *matRowDef="let row; columns: ['select', 'title', 'author', 'genre', 'isbn', 'publisher', 'publishYear', 'actions'];"></tr>
       </table>
     </mat-card-content>
   </mat-card>
