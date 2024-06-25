@@ -1,0 +1,108 @@
+/* General page styling */
+.book-content {
+    padding: 20px;
+    font-family: 'Arial', sans-serif;
+  }
+  
+  .page-title {
+    color: #333;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .book-create {
+    margin-bottom: 20px;
+  }
+  
+  .form-control {
+    width: 100%;
+    padding: 8px;
+    margin: 10px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+  
+  .btn-primary {
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+  }
+  
+  .btn-primary:hover {
+    background-color: #45a049;
+  }
+  
+  .alert-danger {
+    color: red;
+    font-size: 12px;
+  }
+  
+  /* Table styling */
+  .mat-elevation-z8 {
+    box-shadow: 0px 2px 1px -1px rgba(0,0,0,0.2), 0px 1px 1px 0px rgba(0,0,0,0.14), 0px 1px 3px 0px rgba(0,0,0,0.12);
+  }
+  
+  table {
+    width: 100%;
+    margin-top: 20px;
+    border-collapse: collapse;
+  }
+  
+  th, td {
+    text-align: left;
+    padding: 8px;
+  }
+  
+  th {
+    background-color: #f2f2f2;
+  }
+  
+  tr:nth-child(even) {
+    background-color: #f9f9f9;
+  }
+  
+  .material-icons {
+    cursor: pointer;
+    vertical-align: middle;
+  }
+  
+  .material-icons.edit {
+    color: #FFC107; /* Amber */
+  }
+  
+  .material-icons.delete {
+    color: #F44336; /* Red */
+  }
+  
+  .material-icons.done {
+    color: #4CAF50; /* Green */
+  }
+  
+  .material-icons:hover {
+    opacity: 0.8;
+  }
+  
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    .form-control {
+      width: 100%;
+      margin-top: 0;
+    }
+  
+    .btn-primary {
+      width: 100%;
+      margin-top: 10px;
+    }
+  }
+  
