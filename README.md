@@ -12,4 +12,4 @@ It will run on `localhost:4200`.
 ## SpringBoot Backend
 Start the SpringBoot server using `mvn spring-boot:run`, and it will run on `8080`.
 
-![Screenshot] (https://github.com/CuteCheet/Convey365_HomeTask/blob/main/bookappscreenshot.png)
+![ScreenShot](https://github.com/CuteCheet/Convey365_HomeTask/blob/main/bookappscreenshot.png)
