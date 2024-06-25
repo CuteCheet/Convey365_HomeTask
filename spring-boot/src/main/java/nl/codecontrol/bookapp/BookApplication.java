@@ -40,7 +40,7 @@ public class BookApplication {
 
 @Configuration
 @Profile("default")
-@Import(EmbeddedMongoAutoConfiguration.class)
+//@Import(EmbeddedMongoAutoConfiguration.class)
 class Load {
 
 }
