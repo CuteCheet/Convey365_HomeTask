@@ -50,7 +50,7 @@ export class BookListComponent implements OnInit {
 	// Handle creation of a new book
 	createBook(bookForm: NgForm): void {
 		this.bookService.createBook(this.newBook).subscribe(book => {
-			this.books.push(book);  // Push the new book to the books array
+			this.books.push(book);  	// Push the new book to the books array
 			bookForm.resetForm();          // Reset the form after submission
 			this.newBook = new Book(); // Reset the newBook object to clear the form fields
 
