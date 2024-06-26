@@ -55,7 +55,7 @@ export class BookListComponent implements OnInit {
 			this.newBook = new Book(); // Reset the newBook object to clear the form fields
 
 			// Force update to the table data source for Angular Material Table
-			this.books = [...this.books.sort((prev, next) => prev.title.localeCompare(next.title))];
+			this.books = [...this.books];
 		}, error => {
 			console.error('Error creating book', error);
 			// Optionally, display an error message
